@@ -1,14 +1,22 @@
-## sp-fx-header-footer
+## SharePoint Framework custom header and footer application customizer extension
 
 This is where you include your WebPart documentation.
 
-### Building the code
+### Building the code (for localhost debugging)
 
 ```bash
 git clone the repo
 npm i
-npm i -g gulp
-gulp
+gulp serve --nobrowser
+```
+
+### Building the code (for production deployment)
+
+```bash
+git clone the repo
+npm i
+gulp bundle --ship
+gulp package-solution --ship
 ```
 
 This package produces the following:
@@ -19,8 +27,5 @@ This package produces the following:
 
 ### Build options
 
-gulp clean - TODO
-gulp test - TODO
-gulp serve - TODO
-gulp bundle - TODO
-gulp package-solution - TODO
+gulp serve --nobrowser - localhost debugging
+gulp package-solution --ship - production deployment
