@@ -1,0 +1,6 @@
+{
+  "workingDir": "./temp/deploy/",
+  "account": "<!-- STORAGE ACCOUNT NAME -->",
+  "container": "sp-fx-header-footer",
+  "accessKey": "<!-- ACCESS KEY -->"
+}

@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/extensions/headerFooter/HeaderFooterApplicationCustomizer.js",
+      "manifest": "./src/extensions/headerFooter/HeaderFooterApplicationCustomizer.manifest.json",
+      "outputPath": "./dist/header-footer.bundle.js"
+    }
+  ],
+  "externals": {},
+  "localizedResources": {
+    "headerFooterStrings": "extensions/headerFooter/loc/{locale}.js"
+  }
+}
