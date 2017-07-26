@@ -47,10 +47,10 @@ export default class HeaderFooterApplicationCustomizer
         console.log("CustomSiteFooterText: " + r.AllProperties.CustomSiteFooterText);     
 
         if (r.AllProperties.CustomSiteHeaderEnabled == "true") {
-          this.customHeader = $("<div id='customHeader' class='ms-dialogHidden' style='background-color:" + r.AllProperties.CustomSiteHeaderBgColor + ";color:" + r.AllProperties.CustomSiteHeaderColor + ";padding:3px;text-align:center'><b>" + r.AllProperties.CustomSiteHeaderText + "</b></div>");
+          this.customHeader = $("<div id='customHeader' class='ms-dialogHidden' style='background-color:" + r.AllProperties.CustomSiteHeaderBgColor + ";color:" + r.AllProperties.CustomSiteHeaderColor + ";padding:3px;text-align:center;font-family:Segoe UI'><b>" + r.AllProperties.CustomSiteHeaderText + "</b></div>");
         }
         if (r.AllProperties.CustomSiteFooterEnabled == "true") {
-          this.customFooter = $("<div id='customFooter' class='ms-dialogHidden' style='background-color:" + r.AllProperties.CustomSiteFooterBgColor + ";color:" + r.AllProperties.CustomSiteFooterColor + ";padding:3px;text-align:center'><b>" + r.AllProperties.CustomSiteFooterText + "</b></div>");
+          this.customFooter = $("<div id='customFooter' class='ms-dialogHidden' style='background-color:" + r.AllProperties.CustomSiteFooterBgColor + ";color:" + r.AllProperties.CustomSiteFooterColor + ";padding:3px;text-align:center;font-family:Segoe UI'><b>" + r.AllProperties.CustomSiteFooterText + "</b></div>");
         }
 
         resolve();
