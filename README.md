@@ -2,7 +2,7 @@
 
 This is the code for the SharePoint Framework application customizer extension that renders a custom header and footer on all modern pages within a SharePoint Online site. You can read more details about it in my blog post [here](https://dannyjessee.com/blog/index.php/2017/06/custom-modern-page-header-and-footer-using-sharepoint-framework/).
 
-![Modern page header and footer](https://i0.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/06/contentareas3.png?w=820&ssl=1)
+![Modern page header and footer](https://i1.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/08/modernhf2.png?w=953&ssl=1)
 
 Note that this solution complements the SharePoint-hosted add-in that includes the configuration interface and user custom actions to render the header and footer on all classic pages within a SharePoint Online site. You can read more details about that [here](https://dannyjessee.com/blog/index.php/2015/08/custom-site-header-and-footer-using-a-sharepoint-hosted-add-in/). <b>To use this application customizer extension, you will need to first install and configure the add-in.</b>
 
