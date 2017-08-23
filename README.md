@@ -6,7 +6,9 @@ This is the code for the SharePoint Framework application customizer extension t
 
 Note that this solution complements the SharePoint-hosted add-in that includes the configuration interface and user custom actions to render the header and footer on all classic pages within a SharePoint Online site. You can read more details about that [here](https://dannyjessee.com/blog/index.php/2015/08/custom-site-header-and-footer-using-a-sharepoint-hosted-add-in/). <b>To use this application customizer extension, you will need to first install and configure the add-in.</b>
 
-![Add-in part and classic page header and footer](https://i1.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/06/addinpartclassicpage.png?w=820&ssl=1)
+![Add-in part and classic page header and footer](https://i1.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/08/classicaddinsuitebar.png?w=953&ssl=1)
+
+![Add-in part and classic page header and footer](https://i0.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/08/commclassichf.png?w=953&ssl=1)
 
 ### Building the code (for localhost debugging)
 
