@@ -8,8 +8,6 @@ Note that this solution complements the SharePoint-hosted add-in that includes t
 
 ![Add-in part and classic page header and footer](https://i1.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/08/classicaddinsuitebar.png?w=953&ssl=1)
 
-![Add-in part and classic page header and footer](https://i0.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/08/commclassichf.png?w=953&ssl=1)
-
 ### Building the code (for localhost debugging)
 
 ```bash
