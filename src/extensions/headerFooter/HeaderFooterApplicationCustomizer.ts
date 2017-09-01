@@ -2,7 +2,8 @@ import { override } from '@microsoft/decorators';
 import { Log } from '@microsoft/sp-core-library';
 import {
   BaseApplicationCustomizer,
-  Placeholder
+  PlaceholderContent,
+  PlaceholderName
 } from '@microsoft/sp-application-base';
 
 import * as strings from 'headerFooterStrings';
@@ -27,8 +28,8 @@ export interface IHeaderFooterApplicationCustomizerProperties {
 export default class HeaderFooterApplicationCustomizer
   extends BaseApplicationCustomizer<IHeaderFooterApplicationCustomizerProperties> {
 
-  private _headerPlaceholder: Placeholder;
-  private _footerPlaceholder: Placeholder;
+  private _headerPlaceholder: PlaceholderContent | undefined;
+  private _footerPlaceholder: PlaceholderContent | undefined;
   
   @override
   public onInit(): Promise<void> {
@@ -54,6 +55,11 @@ export default class HeaderFooterApplicationCustomizer
           this.properties.Footer = "<div id='customFooter' class='ms-dialogHidden' style='background-color:" + r.AllProperties.CustomSiteFooterBgColor + ";color:" + r.AllProperties.CustomSiteFooterColor + ";padding:3px;text-align:center;font-family:Segoe UI'><b>" + r.AllProperties.CustomSiteFooterText + "</b></div>";
         }
 
+        // Added to handle possible changes on the existence of placeholders
+        this.context.placeholderProvider.changedEvent.add(this, this.onRender);
+        // Call render method for generating the needed HTML elements
+        this.onRender();
+
         resolve();
       });
     });
@@ -63,19 +69,19 @@ export default class HeaderFooterApplicationCustomizer
   public onRender(): void {
     console.log('CustomHeader.onRender()');
     console.log('Available placeholders: ',
-      this.context.placeholders.placeholderNames.join(', '));
+      this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(', '));
 
     // Handling the header placeholder
     if (!this._headerPlaceholder) {
-      this._headerPlaceholder = this.context.placeholders.tryAttach(
-        'PageHeader',
+      this._headerPlaceholder = this.context.placeholderProvider.tryCreateContent(
+        PlaceholderName.Top,
         {
           onDispose: this._onDispose
         });
 
       // The extension should not assume that the expected placeholder is available.
       if (!this._headerPlaceholder) {
-        console.error('The expected placeholder (PageHeader) was not found.');
+        console.error('The expected placeholder (Top) was not found.');
         return;
       }
 
@@ -86,15 +92,15 @@ export default class HeaderFooterApplicationCustomizer
 
     // Handling the footer placeholder
     if (!this._footerPlaceholder) {
-      this._footerPlaceholder = this.context.placeholders.tryAttach(
-        'PageFooter',
+      this._footerPlaceholder = this.context.placeholderProvider.tryCreateContent(
+        PlaceholderName.Bottom,
         {
           onDispose: this._onDispose
         });
 
       // The extension should not assume that the expected placeholder is available.
       if (!this._footerPlaceholder) {
-        console.error('The expected placeholder (PageFooter) was not found.');
+        console.error('The expected placeholder (Bottom) was not found.');
         return;
       }
 

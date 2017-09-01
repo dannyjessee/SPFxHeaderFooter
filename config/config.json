@@ -1,13 +1,18 @@
 {
-  "entries": [
-    {
-      "entry": "./lib/extensions/headerFooter/HeaderFooterApplicationCustomizer.js",
-      "manifest": "./src/extensions/headerFooter/HeaderFooterApplicationCustomizer.manifest.json",
-      "outputPath": "./dist/header-footer.bundle.js"
+  "$schema": "https://dev.office.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "header-footer-bundle": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/headerFooter/HeaderFooterApplicationCustomizer.js",
+          "manifest": "./src/extensions/headerFooter/HeaderFooterApplicationCustomizer.manifest.json"
+        }
+      ]
     }
-  ],
-  "externals": {},
+  },
   "localizedResources": {
-    "headerFooterStrings": "extensions/headerFooter/loc/{locale}.js"
-  }
+    "headerFooterStrings": "lib/extensions/headerFooter/loc/{locale}.js"
+  },
+  "externals": {}
 }
