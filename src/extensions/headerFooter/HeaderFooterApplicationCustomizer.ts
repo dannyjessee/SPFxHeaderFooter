@@ -111,6 +111,6 @@ export default class HeaderFooterApplicationCustomizer
   }
 
   private _onDispose(): void {
-    console.log('[CustomHeader._onDispose] Disposed custom header.');
+    console.log('[HeaderFooterApplicationCustomizer._onDispose] Disposed custom Top and Bottom placeholders.');
   }
 }
