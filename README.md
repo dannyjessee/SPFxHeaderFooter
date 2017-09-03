@@ -37,7 +37,7 @@ This extension is configured to allow [tenant-scoped deployment](https://dev.off
 
 ![Tenant-scoped deployment](https://i1.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/09/tenantscopeddeployment.png?w=784&ssl=1)
 
-### Adding the modern page header/footer user custom action
+### Adding the user custom action for the extension
 
 After checking this box and pressing **Deploy**, you will need to manually add the user custom action on any site where you would like  the custom header and footer to be rendered on modern pages. Because the extension is deployed at tenant scope, it is immediately available to all sites and you no longer need to explicitly add an app from the Site Contents screen on any site where you would like to leverage this functionality. However, because tenant-scoped extensions cannot leverage the feature framework, you now need to associate the user custom action with the **ClientSideComponentId** of the extension manually. This can be accomplished a number of different ways. Some example code using the .NET Managed Client Object Model in a console application is shown below:
 
