@@ -31,4 +31,36 @@ gulp bundle --ship
 gulp package-solution --ship
 ```
 
-When deploying to production, you must first upload the <b>.sppkg</b> file to your tenant's app catalog. You may then install the app from the Site Contents page within your SharePoint Online site.
+### Tenant-scoped deployment
+
+This extension is configured to allow [tenant-scoped deployment](https://dev.office.com/sharepoint/docs/spfx/tenant-scoped-deployment). When deploying to production, you must first upload the <b>.sppkg</b> file to your tenant's app catalog. You will then be given the option to make this solution available to all sites within your organization:
+
+![Tenant-scoped deployment](https://i1.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/09/tenantscopeddeployment.png?w=784&ssl=1)
+
+### Adding the modern page header/footer User Custom Action
+
+After checking this box and pressing **Deploy**, you will need to manually add the user custom action on any site where you would like  the custom header and footer to be rendered on modern pages. Because the extension is deployed at tenant scope, it is immediately available to all sites and you no longer need to explicitly add an app from the Site Contents screen on any site where you would like to leverage this functionality. However, because tenant-scoped extensions cannot leverage the feature framework, you now need to associate the user custom action with the **ClientSideComponentId** of the extension manually. This can be accomplished a number of different ways. Some example code using the .NET Managed Client Object Model in a console application is shown below:
+
+```cs
+using (ClientContext ctx = new ClientContext("https://[YOUR TENANT].sharepoint.com"))
+{
+    SecureString password = new SecureString();
+    foreach (char c in "[YOUR PASSWORD]".ToCharArray()) password.AppendChar(c);
+    ctx.Credentials = new SharePointOnlineCredentials("[USER]@[YOUR TENANT].onmicrosoft.com", password);
+
+    Web web = ctx.Web;
+    UserCustomActionCollection ucaCollection = web.UserCustomActions;
+    UserCustomAction uca = ucaCollection.Add();
+    uca.Title = "SPFxHeaderFooterApplicationCustomizer";
+    uca.Location = "ClientSideExtension.ApplicationCustomizer";
+    uca.ClientSideComponentId = new Guid("bbe5f3fa-7326-455d-8573-9f0b2b015ff9");
+    uca.Update();
+
+    ctx.Load(web, w => w.UserCustomActions);
+    ctx.ExecuteQuery();
+
+    Console.WriteLine("UserCustomAction successfully added to site!");
+}
+```
+
+Keep in mind you will also need to install and configure the [SharePoint-hosted add-in](https://github.com/dannyjessee/SiteHeaderFooter) above on any site where you wish to use this extension, as well as [disable NoScript on that site](https://dannyjessee.com/blog/index.php/2017/07/sharepoint-online-modern-team-sites-are-noscript-sites-but-communication-sites-are-not/) if necessary.
