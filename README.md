@@ -33,13 +33,13 @@ gulp package-solution --ship
 
 ### Tenant-scoped deployment
 
-This extension is configured to allow [tenant-scoped deployment](https://dev.office.com/sharepoint/docs/spfx/tenant-scoped-deployment). When deploying to production, you must first upload the <b>.sppkg</b> file to your tenant's app catalog. You will then be given the option to make this solution available to all sites within your organization:
+This extension is configured to optionally allow [tenant-scoped deployment](https://dev.office.com/sharepoint/docs/spfx/tenant-scoped-deployment). When deploying to production, you must first upload the **.sppkg** file to your tenant's app catalog. You will then be given the option to make this solution available to all sites within your organization:
 
 ![Tenant-scoped deployment](https://i1.wp.com/dannyjessee.com/blog/wp-content/uploads/2017/09/tenantscopeddeployment.png?w=784&ssl=1)
 
-### Adding the user custom action for the extension
+### Adding the user custom action for the extension in a tenant-scoped deployment
 
-After checking this box and pressing **Deploy**, you will need to manually add the user custom action on any site where you would like  the custom header and footer to be rendered on modern pages. Because the extension is deployed at tenant scope, it is immediately available to all sites and you no longer need to explicitly add an app from the Site Contents screen on any site where you would like to leverage this functionality. However, because tenant-scoped extensions cannot leverage the feature framework, you now need to associate the user custom action with the **ClientSideComponentId** of the extension manually. This can be accomplished a number of different ways. Some example code using the .NET Managed Client Object Model in a console application is shown below:
+If you check the box labeled **Make this solution available to all sites in the organization** before pressing **Deploy**, you will need to manually add the user custom action associated with the extension on any site where you would like the custom header and footer to be rendered on modern pages. If you deploy the extension at tenant scope, it is immediately available to all sites and you do not need to explicitly add the app from the Site Contents screen. However, because tenant-scoped extensions cannot leverage the feature framework, you will need to associate the user custom action with the **ClientSideComponentId** of the extension manually. This can be accomplished a number of different ways. Some example code using the .NET Managed Client Object Model in a console application is shown below:
 
 ```cs
 using (ClientContext ctx = new ClientContext("https://[YOUR TENANT].sharepoint.com"))
@@ -52,15 +52,21 @@ using (ClientContext ctx = new ClientContext("https://[YOUR TENANT].sharepoint.c
     UserCustomActionCollection ucaCollection = web.UserCustomActions;
     UserCustomAction uca = ucaCollection.Add();
     uca.Title = "SPFxHeaderFooterApplicationCustomizer";
+    // This is the user custom action location for application customizer extensions
     uca.Location = "ClientSideExtension.ApplicationCustomizer";
+    // Use the ID from HeaderFooterApplicationCustomizer.manifest.json below
     uca.ClientSideComponentId = new Guid("bbe5f3fa-7326-455d-8573-9f0b2b015ff9");
     uca.Update();
 
     ctx.Load(web, w => w.UserCustomActions);
     ctx.ExecuteQuery();
 
-    Console.WriteLine("UserCustomAction successfully added to site!");
+    Console.WriteLine("User custom action added to site successfully!");
 }
 ```
 
-Keep in mind you will also need to install and configure the [SharePoint-hosted add-in](https://github.com/dannyjessee/SiteHeaderFooter) above on any site where you wish to use this extension, as well as [disable NoScript on that site](https://dannyjessee.com/blog/index.php/2017/07/sharepoint-online-modern-team-sites-are-noscript-sites-but-communication-sites-are-not/) if necessary.
+You still need to install and configure the [SharePoint-hosted add-in](https://github.com/dannyjessee/SiteHeaderFooter) on any site where you wish to use this extension and [disable NoScript on that site](https://dannyjessee.com/blog/index.php/2017/07/sharepoint-online-modern-team-sites-are-noscript-sites-but-communication-sites-are-not/) if necessary.
+
+### If you do not perform a tenant-scoped installation
+
+If you decline to check the box to allow tenant-scoped installation when you upload the **.sppkg** file to the app catalog, the extension will be made available to manually add to any site via **Site Contents > Add an app**. This will automatically associate the user custom action on any site where you manually add the extension, so no code is necessary to register the user custom action as shown above in this case.
