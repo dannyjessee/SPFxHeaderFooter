@@ -2,7 +2,18 @@
   "solution": {
     "name": "sp-fx-header-footer-client-side-solution",
     "id": "7ce85f8b-5996-4138-8b54-89f4d7ad2f14",
-    "version": "1.1.1.0",
+    "version": "1.1.4.0",
+    "features": [{
+      "title": "SPFx HeaderFooter Application Extension - Deployment of custom action",
+      "description": "Deploys a custom action with ClientSideComponentId association",
+      "id": "bee23cf7-87d7-4bc6-8c83-81c5fd72e484",
+      "version": "1.0.0.0",
+      "assets": {        
+        "elementManifests": [
+          "elements.xml"
+        ]
+      }
+    }],
     "skipFeatureDeployment": true
   },
   "paths": {
