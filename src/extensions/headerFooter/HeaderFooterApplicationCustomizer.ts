@@ -85,7 +85,7 @@ export default class HeaderFooterApplicationCustomizer
         return;
       }
 
-      if (this.properties && this._headerPlaceholder.domElement) {
+      if (this.properties && this.properties.Header && this._headerPlaceholder.domElement) {
         this._headerPlaceholder.domElement.innerHTML = this.properties.Header;
       }
     }
@@ -104,7 +104,7 @@ export default class HeaderFooterApplicationCustomizer
         return;
       }
 
-      if (this.properties && this._footerPlaceholder.domElement) {
+      if (this.properties && this.properties.Footer && this._footerPlaceholder.domElement) {
         this._footerPlaceholder.domElement.innerHTML = this.properties.Footer;
       }
     }
